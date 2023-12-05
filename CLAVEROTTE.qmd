@@ -151,8 +151,9 @@ cat("Number of star systems not found in system_control.csv:", length(missing_st
 ## Question 11
 
 ```{r}
+new_data_factions <- data_factions[data_factions$`NAME OF THE FACTION` != c("Undiscovered","Independent"),]
 merged_data <- merge(data_syst_ctrl, data_factions, by = "fidx")
-active_factions <- merged_data[merged_data$`NAME OF THE FACTION` != c("U","A","I"), ]
+active_factions <- merged_data[merged_data$`NAME OF THE FACTION`!= c("Undiscovered", "Independent"),]
 
 # Count the number of star systems controlled by each faction
 faction_counts <- table(active_factions$`NAME OF THE FACTION`)
