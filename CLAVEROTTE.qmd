@@ -61,7 +61,7 @@ table_data <- data.frame(
 kable(table_data, format = "markdown")
 ```
 
-### 2 Introductory analysis
+# 2 Introductory analysis
 ## Question 5
 ```{r}
 #| message: false
@@ -78,7 +78,6 @@ ggplot(data_without_na, aes(x = `RELATIVE LUMINOSITY`, y = `star radius`) )+
 ```
 
 ## Question 6
-```{r}
 extreme_stars_table <- data.frame(
   Variable = character(),
   Most_Extreme_Star = character(),
@@ -88,20 +87,20 @@ extreme_stars_table <- data.frame(
   stringsAsFactors = FALSE
 )
 
-# Boucle for à travers les variables numériques
+#Boucle for à travers les variables numériques
 for (i in data[1,i]) {
   # Trouver les indices des lignes avec les valeurs maximales et minimales
   idx_max <- slice_max(data, n = 1, order_by = !!sym(i))$star_name
   idx_min <- slice_min(data, n = 1, order_by = !!sym(i))$star_name
 
-  # Extraire les noms des étoiles et les valeurs
+  #Extraire les noms des étoiles et les valeurs
   most_extreme_star <- slice_max(data, n = 1, order_by = !!sym(i))$star_name
   most_extreme_value <- slice_max(data, n = 1, order_by = !!sym(i))[[variable]]
   
   least_extreme_star <- slice_min(data, n = 1, order_by = !!sym(i))$star_name
   least_extreme_value <- slice_min(data, n = 1, order_by = !!sym(i))[[variable]]
 
-  # Ajouter les résultats au dataframe
+  #Ajouter les résultats au dataframe
   extreme_stars_table <- bind_rows(extreme_stars_table, data.frame(
     Variable = i,
     Most_Extreme_Star = most_extreme_star,
@@ -111,13 +110,22 @@ for (i in data[1,i]) {
   ))
 }
 
-# Afficher le tableau des résultats
+#Afficher le tableau des résultats
 print(extreme_stars_table)
 
-```
 
-We pass 
+
+We pass it, we will do it later
+
+# 3 Factions
 
 ## Question 7
+```{r}
+data_factions<- vroom("bt_factions.csv")
+data_syst_ctrl<- vroom("system_control.csv")
+View(data_factions)
+View(data_syst_ctrl)
+```
+
 
 
