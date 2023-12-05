@@ -63,7 +63,12 @@ kable(table_data, format = "markdown")
 ### 2 Introductory analysis
 ## Question 5
 ```{r}
-View(data)
-
+#| message: false
+#| echo: false
+ggplot(data, aes(x = `RELATIVE LUMINOSITY`, y = `star radius`) )+ 
+  geom_point() + 
+  labs(title = "Radius of a Star by Luminosity",
+       x = "Relative Luminosity",
+       y = "Star Radius") 
 ```
 
