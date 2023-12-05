@@ -19,7 +19,7 @@ library(knitr)
 ## Question 3
 ```{r}
 #| message: false
-data <- vroom("main_data/ALL%SYSTEMS.csv")
+data <- vroom("main_data/ALL%SYSTEMS.csv", row.names(FALSE))
 
 nbr_starsystems <- nrow(data)
 nbr_variables <- ncol(data)
@@ -41,6 +41,29 @@ all(sapply(data, is.numeric))
 
 ## Question 4
 ```{r}
+summary_stats <- data %>%
+  summary()
+# number of observations and number of variables is given by nbr_starsystem and nbr_variables
+nbr_obs <-nbr_starsystems
+nbr_var<-nbr_variables
+
+missing_values_per_variable <- data %>%
+  summarise(across(everything(), ~sum(is.na(.))))
+observations_with_missing_values <- data %>%
+  filter(rowSums(is.na(.)) > 0) %>%
+  nrow()
+
+table_data <- data.frame(
+  Metric = c("Number of Observations", "Number of Variables", "Number of Missing Values (Per Variable)", "Number of Observations with at Least One Missing Value"),
+  Value = c(nbr_obs, nbr_var, toString(missing_values_per_variable), observations_with_missing_values)
+)
+kable(table_data, format = "markdown")
+```
+
+### 2 Introductory analysis
+## Question 5
+```{r}
+View(data)
 
 ```
 
