@@ -3,3 +3,44 @@ title: "CLAVEROTTE"
 auhtor: "Théo Claverotte dit Laprima"
 format: html
 ---
+
+link to the github repository : https://github.com/theoclaverotte/bt_empire.git
+
+```{r}
+#| message: false
+here::i_am("bt_empire.Rproj")
+library(here)
+library(vroom)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+```
+
+## Question 3
+```{r}
+#| message: false
+data <- vroom("main_data/ALL%SYSTEMS.csv")
+
+nbr_starsystems <- nrow(data)
+nbr_variables <- ncol(data)
+
+
+# Chek if the data loading is a success : right number of star systems, variables
+if (nbr_starsystems == 1038) {
+  print("The data loading process is successful. We have the right numer of star systems which is 1038")
+}else{ print("The data loading failed.")}
+
+if (nbr_variables == 8) {
+  print("The data loading process is successful. We have the right numer of variables which is 8")
+}else{ print("The data loading failed.")}
+
+
+# Check if all numerical variables are recognized as numerical
+all(sapply(data, is.numeric))
+```
+
+## Question 4
+```{r}
+
+```
+
