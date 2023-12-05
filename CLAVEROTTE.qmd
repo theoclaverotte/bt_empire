@@ -140,6 +140,32 @@ kable(count_result, format = "markdown")
 
 ## Question 10
 ```{r}
+# Find star systems not in system_control.csv
+missing_star_systems <- data_syst_ctrl$star_code[!(data$star_code %in% data_syst_ctrl$star_code)]
+
+# Output the number of missing star systems
+cat("Number of star systems not found in system_control.csv:", length(missing_star_systems))
 
 ```
 
+## Question 11
+
+```{r}
+merged_data <- merge(data_syst_ctrl, data_factions, by = "fidx")
+active_factions <- merged_data[merged_data$`NAME OF THE FACTION` != c("U","A","I"), ]
+
+# Count the number of star systems controlled by each faction
+faction_counts <- table(active_factions$`NAME OF THE FACTION`)
+
+# Create a bar plot
+ggplot(data = data.frame(Faction = names(faction_counts), Star_Systems = as.numeric(faction_counts)),
+       aes(x = reorder(Faction, -Star_Systems), y = Star_Systems, fill = Faction)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Star Systems Controlled by Each Faction",
+       x = "Faction",
+       y = "Number of Star Systems") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+```
+
+## Question 12
