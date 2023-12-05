@@ -119,13 +119,27 @@ We pass it, we will do it later
 
 # 3 Factions
 
-## Question 7
+## Question 
 ```{r}
+#| message: false
 data_factions<- vroom("bt_factions.csv")
 data_syst_ctrl<- vroom("system_control.csv")
-View(data_factions)
-View(data_syst_ctrl)
 ```
 
 
+## Question 9
+```{r}
+count_result <- data_syst_ctrl%>%
+  group_by(fidx) %>%
+  filter(fidx %in% c("A", "I", "U")) %>%
+  summarise(Count = n())
+kable(count_result, format = "markdown")
+
+```
+
+
+## Question 10
+```{r}
+
+```
 
